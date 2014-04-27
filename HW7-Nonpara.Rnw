@@ -1,0 +1,26 @@
+\documentclass{article}
+
+\usepackage{amsmath, amssymb, latexsym}
+
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+
+\title{HW7 Nonparametric Statistics}
+\author{Fan Heng fh2294\\ Columbia University}
+\date{13 April, 2014}
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+\maketitle
+
+\section{Question 1} % Question 1
+\label{sec:Q1} 
+
+\subsection{(a)}
+\label{FirstSub}
+
+The independent hypothesis is: 
+H_0: P(XY)=P(X)P(Y)    vs     H_1: P(XY)\neqP(X)P(Y)
+
+\end{document}

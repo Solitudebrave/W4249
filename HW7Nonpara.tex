@@ -1,0 +1,343 @@
+\documentclass{article}\usepackage[]{graphicx}\usepackage[]{color}
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+
+\usepackage[marginparwidth = 10pt]{geometry}
+\usepackage{graphicx}
+\DeclareGraphicsExtensions{.png,.jpg}
+\usepackage{parskip}
+\setlength{\parindent}{15pt}
+\parindent=0em
+
+\title{HW7 Nonparametric Statistics}
+\author{Fan Heng fh2294\\ Columbia University}
+\date{13 April, 2014}
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+
+\begin{document}
+\maketitle
+ 
+{\LARGE\bf{Question 1}}\\ % Question 1
+
+{\Large{(a)}} 
+
+The independent hypothesis is: \\
+
+$H_0$: P(X=a,Y=b)=P(X=a)P(Y=b) a, b $\in {{-1, 0, 1}}  \quad  vs \quad    H_1:$ $P(X=a,Y=b)\neq P(X=a)P(Y=b)$ for some a and b.\\
+
+{\Large{(b)}} \\
+
+The $\chi ^2$  statistic  for this test is \\
+
+$nQ_n= n\sum_{a,b \in {(-1,0,1)}} \frac{(P(X=a,Y=b)-P(X=a)P(Y=b))^2}{P(X=a)P(Y=b)}$\\
+
+{\Large{(c)}} \\
+
+The $\chi ^2$ test in R is 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{XY} \hlkwb{<-} \hlkwd{array}\hlstd{(}\hlkwd{c}\hlstd{(}\hlnum{1}\hlstd{,} \hlnum{2}\hlstd{,} \hlnum{4}\hlstd{,} \hlnum{4}\hlstd{,} \hlnum{3}\hlstd{,} \hlnum{10}\hlstd{,} \hlnum{10}\hlstd{,} \hlnum{16}\hlstd{,} \hlnum{50}\hlstd{),} \hlkwd{c}\hlstd{(}\hlnum{3}\hlstd{,} \hlnum{3}\hlstd{), )}
+\hlkwd{rownames}\hlstd{(XY)} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlstr{"X=-1"}\hlstd{,} \hlstr{"X=0"}\hlstd{,} \hlstr{"X=1"}\hlstd{)}
+\hlkwd{colnames}\hlstd{(XY)} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlstr{"Y=-1"}\hlstd{,} \hlstr{"Y=0"}\hlstd{,} \hlstr{"Y=1"}\hlstd{)}
+\hlstd{XY}
+\end{alltt}
+\begin{verbatim}
+##      Y=-1 Y=0 Y=1
+## X=-1    1   4  10
+## X=0     2   3  16
+## X=1     4  10  50
+\end{verbatim}
+\begin{alltt}
+\hlkwd{chisq.test}\hlstd{(XY)}
+\end{alltt}
+
+
+{\ttfamily\noindent\color{warningcolor}{\#\# Warning: Chi-squared approximation may be incorrect}}\begin{verbatim}
+## 
+## 	Pearson's Chi-squared test
+## 
+## data:  XY
+## X-squared = 1.442, df = 4, p-value = 0.8369
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+P value is 0.8369 which is very large, so we accept $H_0$.\\
+
+
+{\LARGE\bf{Question 2}}\\ % Question 2
+
+For $y_1\leq y_2$ $\leq ...$ $ \leq y_n$\\ 
+P($Y_1 \leq y_1, Y_1 \leq y_1, ..., Y_n \leq y_n$)\\
+=P($F_x (X_{(1)}) \leq y_1, F_x (X_{(2)}) \leq y_2, ..., F_x (X_{(n)}) \leq y_n$)\\
+=P($X_{(1)} \leq F_x^{-1} (y_1), X_{(2)} \leq F_x^{-1} (y_2),..., X_{(n)} \leq F_x^{-1} (y_n)$)\\
+
+Each $X_i$ has the same probability to be chosen as $X_{(1)}, ...or X_{(n)}$. So there are n! permutation from $(X_1, X_2,..., X_n)$ to $(X_{(1)}, X_{(2)},..., X_{(n))}$ with each having the same probability of $\frac{1}{n!}$. Therefore,
+
+
+P($X_{(1)} \leq F_x^{-1} (y_1), X_{(2)} \leq F_x^{-1} (y_2),..., X_{(n)} \leq F_x^{-1} (y_n)$) = n! P($X_1 \leq F_x^{-1} (y_1), X_2 \leq F_x^{-1} (y_2),..., X_n \leq F_x^{-1} (y_n)$)\\
+=n! P($X_1 \leq F_x^{-1} (y_1)) P(X_2 \leq F_x^{-1} (y_2)),..., P(X_n \leq F_x^{-1} (y_n)$)\\
+=n! $F_x (F_x^{-1} (y_1)$)$F_x (F_x^{-1} (y_2)$),...,$F_x(F_x^{-1} (y_n)$)\\
+=n! $y_1 y_2,.., y_n$
+
+In other conditions that $y_1\leq y_2$ $\leq ...$ $ \leq y_n$ doesn't hold, P($Y_1 \leq y_1, Y_1 \leq y_1, ..., Y_n \leq y_n$)=0.
+
+The joint probability density function of $Y_1, Y_2,..., Y_n$ is 
+
+$f_{Y_1,Y_2,..,Y_n} = \frac{\partial^{n}{P(Y_1 \leq y_1, Y_1 \leq y_1, ..., Y_n \leq y_n)}}{\partial{y_1}\partial{y_2}...\partial{y_n}}$\\
+=n!
+
+$f_{Y_1,Y_2,..,Y_n}$ =
+
+{\LARGE\bf{Question 3}}\\ % Question 3
+
+Characterizing the distribution of K through Monte Carlo simulation.
+
+Since the distribution of K is free of $F_0$, we can generate sample data from any distribution. In this question, we generate data from uniform(0,1).
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{K} \hlkwb{<-} \hlkwd{rep}\hlstd{(}\hlnum{0}\hlstd{,} \hlnum{10000}\hlstd{)}
+\hlstd{Ind} \hlkwb{<-} \hlkwd{seq}\hlstd{(}\hlnum{1}\hlstd{,} \hlnum{10000}\hlstd{,} \hlnum{1}\hlstd{)}
+\hlkwa{for} \hlstd{(i} \hlkwa{in} \hlnum{1}\hlopt{:}\hlnum{10000}\hlstd{) \{}
+    \hlstd{x} \hlkwb{<-} \hlkwd{runif}\hlstd{(}\hlnum{5}\hlstd{,} \hlnum{0}\hlstd{,} \hlnum{1}\hlstd{)}  \hlcom{# generate 5 data from Uniform(0,1)}
+    \hlstd{x.ord} \hlkwb{<-} \hlstd{x[}\hlkwd{order}\hlstd{(x)]}
+
+    \hlstd{K[i]} \hlkwb{<-} \hlkwd{max}\hlstd{(}\hlkwd{abs}\hlstd{((}\hlkwd{order}\hlstd{(x.ord)} \hlopt{-} \hlnum{1}\hlstd{)}\hlopt{/}\hlnum{5} \hlopt{-} \hlstd{x.ord),} \hlkwd{abs}\hlstd{(}\hlkwd{order}\hlstd{(x.ord)}\hlopt{/}\hlnum{5} \hlopt{-} \hlstd{x.ord),}
+        \hlkwd{abs}\hlstd{(x.ord[}\hlnum{1}\hlstd{]),} \hlkwd{abs}\hlstd{(}\hlnum{1} \hlopt{-} \hlstd{x.ord[}\hlnum{5}\hlstd{]))}
+\hlstd{\}}
+
+\hlcom{# the density function of K}
+\hlkwd{plot}\hlstd{(}\hlkwd{density}\hlstd{(K),} \hlkwc{main} \hlstd{=} \hlstr{"Simulated p.d.f of K using Unif[0,1] sample"}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=.6\linewidth]{figure/K-distr1} 
+\begin{kframe}\begin{alltt}
+\hlcom{# the cumulative distribution function of K}
+\hlstd{quantileK} \hlkwb{<-} \hlkwd{seq}\hlstd{(}\hlnum{0.001}\hlstd{,} \hlnum{1}\hlstd{,} \hlnum{0.001}\hlstd{)}
+\hlstd{cdfK} \hlkwb{<-} \hlkwd{rep}\hlstd{(}\hlnum{0}\hlstd{,} \hlnum{1000}\hlstd{)}
+\hlkwa{for} \hlstd{(i} \hlkwa{in} \hlnum{1}\hlopt{:}\hlnum{1000}\hlstd{) \{}
+    \hlstd{cdfK[i]} \hlkwb{<-} \hlkwd{sum}\hlstd{(K} \hlopt{<=} \hlstd{quantileK[i])}\hlopt{/}\hlnum{10000}
+\hlstd{\}}
+\hlkwd{plot}\hlstd{(quantileK, cdfK,} \hlkwc{xlab} \hlstd{=} \hlstr{""}\hlstd{,} \hlkwc{ylab} \hlstd{=} \hlstr{"CDF"}\hlstd{,} \hlkwc{main} \hlstd{=} \hlstr{"CDF of K"}\hlstd{,} \hlkwc{type} \hlstd{=} \hlstr{"l"}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=.6\linewidth]{figure/K-distr2} 
+\begin{kframe}\begin{alltt}
+\hlkwd{mean}\hlstd{(K)}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.3583
+\end{verbatim}
+\begin{alltt}
+\hlkwd{var}\hlstd{(K)}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.01206
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+The empirical distribution of K is N(0.427, 0.018). 
+
+
+{\LARGE\bf{Question 4}}\\ % Question 4 
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{x} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlopt{-}\hlnum{6.3}\hlstd{,} \hlnum{2.94}\hlstd{,} \hlnum{2.53}\hlstd{,} \hlopt{-}\hlnum{0.86}\hlstd{,} \hlnum{5.04}\hlstd{,} \hlnum{3.22}\hlstd{,} \hlopt{-}\hlnum{1.62}\hlstd{,} \hlnum{3.56}\hlstd{,} \hlnum{1.13}\hlstd{,} \hlnum{2.63}\hlstd{,} \hlopt{-}\hlnum{1.08}\hlstd{,}
+    \hlnum{3.66}\hlstd{,} \hlnum{4.07}\hlstd{,} \hlopt{-}\hlnum{3.66}\hlstd{,} \hlnum{0.74}\hlstd{,} \hlnum{2.85}\hlstd{,} \hlnum{2.85}\hlstd{,} \hlnum{1.7}\hlstd{,} \hlnum{1.53}\hlstd{,} \hlnum{7.33}\hlstd{,} \hlnum{2.82}\hlstd{,} \hlopt{-}\hlnum{2.31}\hlstd{,} \hlnum{0.94}\hlstd{,}
+    \hlopt{-}\hlnum{0.04}\hlstd{,} \hlopt{-}\hlnum{1.2}\hlstd{,} \hlnum{1.2}\hlstd{,} \hlnum{5.1}\hlstd{,} \hlnum{4.69}\hlstd{,} \hlopt{-}\hlnum{0.46}\hlstd{,} \hlnum{2.17}\hlstd{,} \hlnum{2.01}\hlstd{,} \hlnum{0.36}\hlstd{,} \hlnum{3.14}\hlstd{,} \hlnum{8.04}\hlstd{,} \hlnum{7.14}\hlstd{,}
+    \hlnum{2.54}\hlstd{,} \hlopt{-}\hlnum{3.03}\hlstd{,} \hlnum{4.25}\hlstd{,} \hlopt{-}\hlnum{0.91}\hlstd{,} \hlnum{1.65}\hlstd{,} \hlnum{2.26}\hlstd{,} \hlopt{-}\hlnum{1.83}\hlstd{,} \hlopt{-}\hlnum{0.68}\hlstd{,} \hlnum{6.28}\hlstd{,} \hlnum{2.93}\hlstd{,} \hlopt{-}\hlnum{0.5}\hlstd{,} \hlnum{2.42}\hlstd{,}
+    \hlnum{3.29}\hlstd{,} \hlnum{0.03}\hlstd{,} \hlnum{6.65}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+
+{\Large{(a)}} 
+
+Our assumption is that data $X_1,....,X_{50}$ is drawm from a Gaussian distribution.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# Generate a new data set y from Gaussian N(0,1)}
+\hlstd{yy} \hlkwb{<-} \hlkwd{rnorm}\hlstd{(}\hlnum{1000}\hlstd{,} \hlnum{0}\hlstd{,} \hlnum{1}\hlstd{)}
+\hlstd{qq} \hlkwb{<-} \hlkwd{qqplot}\hlstd{(yy, x,} \hlkwc{xlab} \hlstd{=} \hlstr{"Gaussian"}\hlstd{,} \hlkwc{ylab} \hlstd{=} \hlstr{"Emperical Distribution"}\hlstd{,} \hlkwc{main} \hlstd{=} \hlstr{"qq-plot to Q4"}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=.6\linewidth]{figure/qqnorm} 
+
+\end{knitrout}
+
+The qqplot seems like a straight line except a few points. It supports our assumption.
+
+{\Large{(b)}} 
+
+Fit a line to the qq-plot data and estimate mean and variance of distribution F.
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{yy} \hlkwb{<-} \hlkwd{rnorm}\hlstd{(}\hlnum{1000}\hlstd{,} \hlnum{0}\hlstd{,} \hlnum{1}\hlstd{)}
+\hlstd{qq} \hlkwb{<-} \hlkwd{qqplot}\hlstd{(yy, x,} \hlkwc{xlab} \hlstd{=} \hlstr{"Gaussian"}\hlstd{,} \hlkwc{ylab} \hlstd{=} \hlstr{"Emperical Distribution"}\hlstd{,} \hlkwc{main} \hlstd{=} \hlstr{"qq-plot to Q4"}\hlstd{)}
+\hlstd{qqfit} \hlkwb{<-} \hlkwd{lm}\hlstd{(qq}\hlopt{$}\hlstd{y} \hlopt{~} \hlstd{qq}\hlopt{$}\hlstd{x)}
+\hlkwd{abline}\hlstd{(qqfit,} \hlkwc{lty} \hlstd{=} \hlnum{1}\hlstd{)}
+\hlkwd{abline}\hlstd{(}\hlkwc{v} \hlstd{=} \hlnum{0}\hlstd{,} \hlkwc{h} \hlstd{=} \hlnum{0}\hlstd{,} \hlkwc{lty} \hlstd{=} \hlnum{2}\hlstd{)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=.6\linewidth]{figure/qqfit} 
+\begin{kframe}\begin{alltt}
+\hlstd{qqfit}\hlopt{$}\hlstd{coef}
+\end{alltt}
+\begin{verbatim}
+## (Intercept)        qq$x 
+##       1.790       2.502
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+QQ-plot shows the linear relationship of $t_0(a) \equiv F_0^{-1}(\alpha) and t(a) \equiv F^{-1}(\alpha). The linear equation is t(a)=\sigma t_0(a) + \mu where \mu is the mean of distribution F and \sigma is the variance.$\\
+
+
+$From the fitted line to the qq-plot data, \hat{\sigma}=2.637498, and \hat{\mu}=1.823786.$ 
+
+
+{\LARGE\bf{Question 5 , 6 }} on a separate page\\
+
+
+{\LARGE\bf{Question 7}}\\ % Question 7 
+
+
+The Null hypothesis for this question is that $H_0: the time between the occurrence of fire in the reserve follows Exp(1/15) \quad vs \quad H_1: the time between the occurence of the fire in the reserve does not follow Exp(1/15).$
+
+{\Large{(a)}} 
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{firedate} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlnum{4}\hlstd{,} \hlnum{18}\hlstd{,} \hlnum{32}\hlstd{,} \hlnum{37}\hlstd{,} \hlnum{56}\hlstd{,} \hlnum{64}\hlstd{,} \hlnum{78}\hlstd{,} \hlnum{89}\hlstd{,} \hlnum{104}\hlstd{,} \hlnum{134}\hlstd{,} \hlnum{154}\hlstd{,} \hlnum{178}\hlstd{,} \hlnum{190}\hlstd{,} \hlnum{220}\hlstd{,} \hlnum{256}\hlstd{)}
+\hlstd{fireinter} \hlkwb{<-} \hlstd{firedate[}\hlopt{-}\hlnum{1}\hlstd{]} \hlopt{-} \hlstd{firedate[}\hlopt{-}\hlnum{15}\hlstd{]}
+\hlcom{# Generate dataset from Exp(1/15)}
+\hlstd{expy} \hlkwb{<-} \hlkwd{rexp}\hlstd{(}\hlkwd{length}\hlstd{(fireinter),} \hlkwc{rate} \hlstd{=} \hlnum{1}\hlopt{/}\hlnum{15}\hlstd{)}
+
+\hlcom{# qqplot of the data}
+\hlstd{qqfire} \hlkwb{<-} \hlkwd{qqplot}\hlstd{(expy, firedate,} \hlkwc{main} \hlstd{=} \hlstr{"QQ-plot for Q7"}\hlstd{)}
+\hlkwd{abline}\hlstd{(}\hlkwd{lm}\hlstd{(qqfire}\hlopt{$}\hlstd{y} \hlopt{~} \hlstd{qqfire}\hlopt{$}\hlstd{x))}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=.6\linewidth]{figure/qqexp} 
+
+\end{knitrout}
+
+
+The qqplot doesn't seem to be a straight line so the clain is not justified.
+
+{\Large{(b)}} 
+
+Kolmogorov-Smirnov test
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# install.packages('exptest')}
+\hlkwd{require}\hlstd{(exptest)}
+\end{alltt}
+
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Loading required package: exptest}}\begin{alltt}
+\hlkwd{ks.exp.test}\hlstd{(fireinter)}
+\end{alltt}
+\begin{verbatim}
+## 
+## 	Kolmogorov-Smirnov test for exponentiality
+## 
+## data:  fireinter
+## KSn = 0.3144, p-value = 0.0195
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+The P-value of Kolmogorov-Smirnov test is 0.0225 which is significant under 5\% significant level. We reject the Null.
+
+{\Large{(c)}}
+
+The Anderson-Darling test
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# install.packages('ADGofTest')}
+\hlkwd{require}\hlstd{(ADGofTest)}
+\end{alltt}
+
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Loading required package: ADGofTest}}\begin{alltt}
+\hlkwd{ad.test}\hlstd{(fireinter, pexp)}
+\end{alltt}
+\begin{verbatim}
+## 
+## 	Anderson-Darling GoF Test
+## 
+## data:  fireinter  and  pexp
+## AD = 170.4, p-value = 4.286e-05
+## alternative hypothesis: NA
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+The P-value of Anderson-Darling test is 4.286e-05 which is significant under 5\% significant level. We reject the Null.
+
+\end{document}
+
+runif(5,0,1)
